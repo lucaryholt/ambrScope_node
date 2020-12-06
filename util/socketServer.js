@@ -2,7 +2,7 @@ const firebaseRepo = require('./firebaseRepo.js');
 
 let io = null;
 
-function initiateSocket(server) {
+function initiateSocketServer(server) {
     io = require('socket.io')(server);
 
     io.on('connection', (socket) => {
@@ -17,5 +17,5 @@ function initiateSocket(server) {
 }
 
 module.exports = {
-    initiateSocket
+    initiateSocketServer
 };

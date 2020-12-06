@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
 
-require('./util/socket.js').initiateSocket(server);
+require('./util/socketServer.js').initiateSocketServer(server);
 
 require('./util/firebaseRepo.js');
 

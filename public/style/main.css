@@ -37,6 +37,16 @@ html {
     height: 100%;
 }
 
+#map {
+    height: 600px;
+    width: 100%;
+}
+
+.marker {
+    color: black;
+    text-align: start;
+}
+
 .message-box {
     max-width: 50%;
 }
