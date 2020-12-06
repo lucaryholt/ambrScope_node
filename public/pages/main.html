@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ambrScope</title>
+
+    <!-- Cookie disclaimer, Bootstrap and project CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="../style/main.css">
+</head>
+<body>
+<div id="logged-out-buttons" class="top-right-button">
+    <button class="btn btn-outline-dark" type="button" data-toggle="modal" data-target="#register-modal">Register</button>
+    <button class="btn btn-outline-dark" type="button" data-toggle="modal" data-target="#login-modal">Login</button>
+</div>
+<div id="logged-in-buttons" class="top-right-button">
+    <button id="user-page-button" class="btn btn-outline-dark" type="button" onclick="showPage('userpage');">User page</button>
+    <button id="logout-button" class="btn btn-outline-dark" type="button" onclick="logout()">Logout</button>
+</div>
+<a id="site-logo" class="navbar-brand" onclick="showPage('')">
+    <img src="" alt="Logo">
+</a>
+<div id="pop-up-alert-hook" class="center"></div>
+
+<!-- Where page html is injected -->
+<div class="container"></div>
+
+<!-- Modal containing login form -->
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="login-alert-hook"></div>
+                <form onsubmit="login(); return false;">
+                    <div class="form-group">
+                        <input type="email" id="username-input" placeholder="Email" class="form-control" required>
+                        <input type="password" id="password-input" placeholder="Password" class="form-control" required>
+                        <button type="submit" class="btn btn-block btn-primary">Login</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" onclick="anonymousLogin();">Anonymous login</button>
+                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#request-password-reset-modal" onclick="$('#login-modal').modal('hide');">Reset password</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal containing register form -->
+<div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="register-modal-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="register-alert-hook"></div>
+                <form onsubmit="register(); return false;">
+                    <div class="form-group">
+                        <input type="email" id="username-register-input" placeholder="Email" class="form-control" required>
+                        <input type="password" id="password-register-input" placeholder="Password" class="form-control" required>
+                        <input type="password" id="password-confirm-register-input" placeholder="Confirm password" class="form-control" required>
+                        <button type="submit" class="btn btn-block btn-primary">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal containing request password reset form -->
+<div class="modal fade" id="request-password-reset-modal" tabindex="-1" role="dialog" aria-labelledby="register-modal-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="request-password-reset-alert-hook"></div>
+                <form onsubmit="passwordReset(); return false;">
+                    <div class="form-group">
+                        <input type="email" id="username-password-reset-input" placeholder="Email" class="form-control" required>
+                        <button type="submit" class="btn btn-block btn-primary">Reset password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- About page link -->
+<a id="about-button" onclick="showPage('about')"><i class="fas fa-question-circle"></i></a>
+
+<!-- Import jQuery, Bootstrap JS, Fontawesome and project JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/af932a1361.js" crossorigin="anonymous"></script>
+<script src="../js/alert.js"></script>
+<script src="../js/responseHandler.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/main.js"></script>
+
+<!-- Cookie Disclaimer -->
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+<script>
+    window.cookieconsent.initialise({
+        "palette": {
+            "popup": {
+                "background": "#efefef",
+                "text": "#404040"
+            },
+            "button": {
+                "background": "#8ec760",
+                "text": "#ffffff"
+            }
+        },
+        "theme": "edgeless"
+    });
+</script>
+</body>
+</html>

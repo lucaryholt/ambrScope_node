@@ -3,9 +3,17 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 
-require('./util/firebaseAuth.js');
-
 app.use(express.static('public'));
+app.use(express.json());
+
+const session = require('express-session');
+
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+}));
 
 app.use(require('./routes/pages.js'));
 
