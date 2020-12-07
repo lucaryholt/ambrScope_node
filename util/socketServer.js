@@ -1,9 +1,8 @@
+const firebaseApp = require('./firebase.js');
 const firebaseRepo = require('./firebaseRepo.js');
 
-let io = null;
-
 function initiateSocketServer(server) {
-    io = require('socket.io')(server);
+    const io = require('socket.io')(server);
 
     io.on('connection', (socket) => {
         socket.on('request spots', ({ data }) => {

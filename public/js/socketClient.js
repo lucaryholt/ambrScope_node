@@ -7,6 +7,6 @@ function requestSpots() {
 socket.on('server update spots', ({ data }) => {
     clearMarkers();
     data.map(spot => {
-        addSpot(spot);
+        addMarker(spot);
     });
 });

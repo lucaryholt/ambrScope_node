@@ -81,7 +81,7 @@ function logout() {
                         loggedOutButtons.show();
                         $('#user-page-button').show();
                         popUpAlert(result.message, 'info');
-                        //showPage('');
+                        showPage('');
                     });
             }, (error) => {
                 popUpAlert(error, 'warning');

@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-8">
+        <form id="add-spot-form" onsubmit="saveSpot(); return false;">
+            <h4>Add a description of this spot</h4>
+            <input type="text" id="description-input" class="form-control form-control-lg" placeholder="Description" maxlength="20" required>
+            <h4>What time of day and year did you use this spot?</h4>
+            <input type="text" id="time-input" class="form-control form-control-lg" placeholder="Time of day and year">
+            <h4>What is the chance of finding amber here?</h4>
+            <select class="form-control" id="chance-input">
+                <option value="Good">Good</option>
+                <option value="Medium">Medium</option>
+                <option value="Bad">Bad</option>
+            </select>
+            <h4>What method did you use here?</h4>
+            <select class="form-control" id="finder-method-input">
+                <option value="Eyes">Eyes</option>
+                <option value="Amber flashlight">Amber flashlight</option>
+                <option value="Kese">Kese</option>
+            </select>
+            <h4>Is this location precise?</h4>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" name="precise-radio" id="precise-radio-precise" checked>
+                <label class="form-check-label" for="precise-radio-precise">Precise</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" name="precise-radio" id="precise-radio-not-precise">
+                <label class="form-check-label" for="precise-radio-not-precise">Not precise</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg">Save</button>
+        </form>
+    </div>
+    <div class="col-4">
+        <div id="add-spot-map"></div>
+    </div>
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE&callback=initMap&libraries=&v=weekly"></script>
+<script src="../js/addspot.js"></script>

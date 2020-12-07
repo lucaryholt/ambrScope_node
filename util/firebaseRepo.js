@@ -20,8 +20,13 @@ function listenForUpdates(callback) {
     listenerCallbacks.push(callback);
 }
 
+async function saveSpot(spot) {
+    await col.doc(spot.id).set(spot);
+}
+
 module.exports = {
     col,
     spots,
-    listenForUpdates
+    listenForUpdates,
+    saveSpot
 };

@@ -1,5 +1,12 @@
+let map = undefined;
+let markers = [];
+let tempMarker = undefined;
+
+let lat = undefined;
+let lng = undefined;
+
 function showPage(pageString) {
-    window.history.replaceState('', '', '/' + pageString);
+    if (pageString !== 'addspot') window.history.replaceState('', '', '/' + pageString);
     switch (pageString.split('/')[0]) {
         case '': {
             getPageHTML('frontpage');

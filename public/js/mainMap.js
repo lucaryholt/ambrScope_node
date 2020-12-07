@@ -1,10 +1,4 @@
-let map;
-let markers = [];
-let tempMarker;
-
 function initMap() {
-    const uluru = { lat: -25.344, lng: 131.036 }
-
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 6,
         center: { lat: 56.085556, lng: 10.8746833 }
@@ -17,7 +11,7 @@ function initMap() {
         }
         else {
             const infoWindow = new google.maps.InfoWindow({
-                content: '<div class="marker"><span><a href="/addspot?lat=' + e.latLng.lat() + '&lng=' + e.latLng.lng() + '">Add spot here.</a></span></div>'
+                content: '<div class="marker"><span><a onclick="addSpot(' + e.latLng.lat() + ',' + e.latLng.lng() +')">Add spot here.</a></span></div>'
             });
 
             tempMarker = new google.maps.Marker({
@@ -43,7 +37,7 @@ function clearMarkers() {
     markers.length = 0;
 }
 
-function addSpot(spot) {
+function addMarker(spot) {
     const infoWindow = new google.maps.InfoWindow({
         content:
             '<div class="marker">' +
@@ -65,4 +59,8 @@ function addSpot(spot) {
         infoWindow.open(map, marker);
     });
     markers.push(marker);
+}
+
+function addSpot(lat, lng) {
+    showPage('addspot?lat=' + lat + '&lng=' + lng);
 }

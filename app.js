@@ -5,14 +5,12 @@ const app = express();
 const server = require('http').createServer(app);
 
 require('./util/socketServer.js').initiateSocketServer(server);
-
 require('./util/firebaseRepo.js');
 
 app.use(express.static('public'));
 app.use(express.json());
 
 const session = require('express-session');
-
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -21,8 +19,8 @@ app.use(session({
 }));
 
 app.use(require('./routes/pages.js'));
-
 app.use(require('./routes/auth.js'));
+app.use(require('./routes/spots.js'));
 
 server.listen(process.env.PORT, (error) => {
     if (error) console.log('Error starting server.');

@@ -2,7 +2,7 @@ const router = require('express').Router();
 const firebaseAuth = require('../util/firebase').auth();
 
 router.get('/auth/logout', (req, res) => {
-    firebaseAuth.signOut();
+    firebaseAuth.signOut(); // TODO maybe just call this after login, as we dont use the firebase user after
     req.session.user = undefined;
     return res.status(200).send({ message: 'Logged out!' });
 });
