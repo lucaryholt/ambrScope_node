@@ -34,7 +34,7 @@ function saveSpot() {
     const finderMethod = document.getElementById('finder-method-input').value;
     const precise = document.getElementById('precise-radio-precise').checked;
 
-    fetch('/spots/addspot', {
+    fetch('/spots', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

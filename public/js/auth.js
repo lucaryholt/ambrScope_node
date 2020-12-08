@@ -33,7 +33,7 @@ function login() {
                         sessionStorage.setItem('username', result.username);
                         setTimeout(() => {
                             $('#login-modal').modal('toggle');
-                            $('#user-page-button').html(sessionStorage.getItem('username'));
+                            $('#user-page-button').text(sessionStorage.getItem('username'));
                             loggedOutButtons.hide();
                             loggedInButtons.show();
                             document.getElementById('username-input').value = '';

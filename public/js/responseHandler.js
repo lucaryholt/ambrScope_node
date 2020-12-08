@@ -1,7 +1,8 @@
 function handleResponse(response, successCallback, errorCallback) {
     switch (response.status) {
         case 200:
-        case 201: {
+        case 201:
+        case 204: {
             successCallback(response);
             break;
         }
