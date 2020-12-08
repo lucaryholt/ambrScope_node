@@ -17,7 +17,8 @@ function initMap() {
             zoom: 14,
             center: spotCoordinates,
             disableDefaultUI: true,
-            gestureHandling: 'none'
+            gestureHandling: 'none',
+            mapId: '8a7896a740fb9f7b'
         });
 
         const spotMarker = new google.maps.Marker({
