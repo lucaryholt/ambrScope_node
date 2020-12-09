@@ -1,7 +1,7 @@
 const loggedOutButtons = $('#logged-out-buttons');
 const loggedInButtons = $('#logged-in-buttons');
 
-fetch('/auth/logintest')
+fetch('/logintest')
     .then(response => {
         if (response.status === 401 || response.status === 403) {
             loggedInButtons.hide();
@@ -71,7 +71,7 @@ function anonymousLogin() {
 }
 
 function logout() {
-    fetch('/auth/logout')
+    fetch('/logout')
         .then(response => {
             handleResponse(response, (response) => {
                 response.json()

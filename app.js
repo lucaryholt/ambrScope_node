@@ -18,9 +18,24 @@ app.use(session({
     cookie: { secure: false }
 }));
 
-app.use(require('./routes/pages.js'));
+const rateLimiter = require('express-rate-limit');
+
+const authLimit = rateLimiter({
+    windowMs: 10 * 60 * 1000,
+    max: 20
+});
+
+const spotsLimit = rateLimiter({
+    windowMs: 10 * 60 * 1000,
+    max: 30
+});
+
+app.use('/auth', authLimit);
+app.use('/spots', spotsLimit);
+
 app.use(require('./routes/auth.js'));
 app.use(require('./routes/spots.js'));
+app.use(require('./routes/pages.js'));
 
 server.listen(process.env.PORT, (error) => {
     if (error) console.log('Error starting server.');
