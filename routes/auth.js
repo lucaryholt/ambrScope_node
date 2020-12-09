@@ -2,7 +2,6 @@ const router = require('express').Router();
 const firebaseAuth = require('../util/firebase').auth();
 
 router.get('/logout', (req, res) => {
-    firebaseAuth.signOut(); // TODO maybe just call this after login, as we dont use the firebase user after
     req.session.user = undefined;
     return res.status(200).send({ message: 'Logged out!' });
 });
@@ -23,6 +22,7 @@ router.post('/auth/login', (req, res) => {
                     id: user.user.uid,
                     anonymous: user.user.isAnonymous
                 };
+                firebaseAuth.signOut();
                 return res.status(200).send({ message: 'Logged in anonymously!' });
             })
             .catch((error) => {
@@ -37,13 +37,13 @@ router.post('/auth/login', (req, res) => {
                     email: user.user.email,
                     anonymous: user.user.isAnonymous
                 };
+                firebaseAuth.signOut();
                 return res.status(200).send({ message: 'Logged in!', username: user.user.email });
             })
             .catch((error) => {
                 const errorCode = error.code;
-                if (errorCode === 'auth/user-not-found') return res.status(403).send({ message: 'User does not exist.' });
+                if (errorCode === 'auth/user-not-found') return res.status(404).send({ message: 'User does not exist.' });
                 else if (errorCode === 'auth/wrong-password') return res.status(403).send({ message: 'Wrong password.' });
-
                 return res.status(403).send({ message: 'Could not log in.' });
             });
     }
@@ -57,14 +57,12 @@ router.post('/auth/register', (req, res) => {
                 email: user.user.email,
                 anonymous: user.user.isAnonymous
             };
+            firebaseAuth.signOut();
             return res.status(200).send({ message: 'Registered and logged in!', username: user.user.email });
         })
         .catch((error) => {
             const errorCode = error.code;
-            console.log(errorCode);
-
             if (errorCode === 'auth/email-already-in-use') return res.status(403).send({ message: 'Email is already in use.' });
-
             return res.status(500).send({ message: 'Could not register.' });
         });
 });
