@@ -1,20 +1,19 @@
-const firebaseApp = require('./firebase.js');
 const firebaseRepo = require('./firebaseRepo.js');
 
 function initiateSocketServer(server) {
-    const io = require('socket.io')(server);
+  const io = require('socket.io')(server);
 
-    io.on('connection', (socket) => {
-        socket.on('request spots', ({ data }) => {
-            socket.emit('server update spots', { data: firebaseRepo.spots });
-        });
+  io.on('connection', (socket) => {
+    socket.on('request spots', () => {
+      socket.emit('server update spots', { data: firebaseRepo.spots });
     });
+  });
 
-    firebaseRepo.listenForUpdates((spots) => {
-        io.emit('server update spots', { data: spots });
-    });
+  firebaseRepo.listenForUpdates((spots) => {
+    io.emit('server update spots', { data: spots });
+  });
 }
 
 module.exports = {
-    initiateSocketServer
+  initiateSocketServer,
 };

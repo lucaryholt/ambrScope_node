@@ -1,46 +1,46 @@
-let map = undefined;
-let markers = [];
-let tempMarker = undefined;
+let map;
+const markers = [];
+let tempMarker;
 
-let lat = undefined;
-let lng = undefined;
+let lat;
+let lng;
 
 function showPage(pageString) {
-    if (pageString !== 'addspot') window.history.replaceState('', '', '/' + pageString);
-    switch (pageString.split('/')[0]) {
-        case '': {
-            getPageHTML('frontpage');
-            break;
-        }
-        default: {
-            getPageHTML(pageString);
-        }
+  if (pageString !== 'addspot') window.history.replaceState('', '', `/${pageString}`);
+  switch (pageString.split('/')[0]) {
+    case '': {
+      getPageHTML('frontpage');
+      break;
     }
+    default: {
+      getPageHTML(pageString);
+    }
+  }
 }
 
 function getPageHTML(page) {
-    fetch('/pages/' + page)
-        .then(response => {
-            handleResponse(response, (response) => {
-                response.text()
-                    .then(result => {
-                        const container = $('.container');
+  fetch(`/pages/${page}`)
+    .then((response) => {
+      handleResponse(response, (response) => {
+        response.text()
+          .then((result) => {
+            const container = $('.container');
 
-                        container.html(
-                            '<div class="spinner-grow" role="status">' +
-                            '<span class="sr-only">Loading...</span>' +
-                            '</div>'
-                        );
+            container.html(
+              '<div class="spinner-grow" role="status">'
+                + '<span class="sr-only">Loading...</span>'
+                + '</div>',
+            );
 
-                        setTimeout(() => {
-                            container.html('');
-                            container.append(result + '');
-                        }, 750);
-                    });
-            }, (error) => {
-                popUpAlert(error, 'warning');
-            });
-        });
+            setTimeout(() => {
+              container.html('');
+              container.append(`${result}`);
+            }, 750);
+          });
+      }, (error) => {
+        popUpAlert(error, 'warning');
+      });
+    });
 }
 
 showPage(window.location.pathname.substring(1));
