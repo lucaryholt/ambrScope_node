@@ -34,6 +34,8 @@ function saveSpot() {
   const chance = $('#chance-input').val();
   const finderMethod = $('#finder-method-input').val();
   const precise = $('#precise-radio-precise')[0].checked;
+  const amount = $('#amount-input').val();
+  const additionalInfo = $('#additional-info-input').val();
 
   fetch('/spots', {
     method: 'POST',
@@ -48,6 +50,8 @@ function saveSpot() {
       precise: `${precise}`,
       latitude: `${lat}`,
       longitude: `${lng}`,
+      amount,
+      additionalInfo,
     }),
   })
     .then((response) => {

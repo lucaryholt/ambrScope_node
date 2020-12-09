@@ -37,6 +37,8 @@ router.post('/spots', async (req, res) => {
       precise: req.body.precise,
       latitude: req.body.latitude,
       longitude: req.body.longitude,
+      amount: req.body.amount,
+      additionalInfo: req.body.additionalInfo,
     };
     await firebaseRepo.saveSpot(spot);
 

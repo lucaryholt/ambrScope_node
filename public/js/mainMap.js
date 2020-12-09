@@ -45,7 +45,9 @@ function addMarker(spot) {
             + `<span>Chance: ${spot.chance}</span><br>`
             + `<span>Finder method: ${spot.finderMethod}</span><br>`
             + `<span>Time: ${spot.time}</span><br>`
-            + `<span>Precise: ${spot.precise}</span>`
+            + `<span>Precise: ${spot.precise}</span><br>`
+            + `<span>Amount: ${spot.amount}</span><br>`
+            + `<span>Additional info: ${spot.additionalInfo}</span>`
             + '</div>',
   });
 
