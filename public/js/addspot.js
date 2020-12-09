@@ -29,11 +29,11 @@ function initMap() {
 }
 
 function saveSpot() {
-    const description = document.getElementById('description-input').value;
-    const time = document.getElementById('time-input').value;
-    const chance = document.getElementById('chance-input').value;
-    const finderMethod = document.getElementById('finder-method-input').value;
-    const precise = document.getElementById('precise-radio-precise').checked;
+    const description = $('#description-input').val();
+    const time = $('#time-input').val();
+    const chance = $('#chance-input').val();
+    const finderMethod = $('#finder-method-input').val();
+    const precise = $('#precise-radio-precise')[0].checked;
 
     fetch('/spots', {
         method: 'POST',

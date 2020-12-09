@@ -12,8 +12,10 @@ fetch('/logintest')
     });
 
 function login() {
-    const username = document.getElementById('username-input').value;
-    const password = document.getElementById('password-input').value;
+    const usernameInput = $('#username-input');
+    const passwordInput = $('#password-input');
+    const username = usernameInput.val();
+    const password = passwordInput.val();
 
     fetch('/auth/login', {
         method: 'POST',
@@ -31,13 +33,13 @@ function login() {
                     .then(result => {
                         modalAlert(result.message, 'login', 'success');
                         sessionStorage.setItem('username', result.username);
+                        $('#user-page-button').text(sessionStorage.getItem('username'));
+                        loggedOutButtons.hide();
+                        loggedInButtons.show();
                         setTimeout(() => {
                             $('#login-modal').modal('toggle');
-                            $('#user-page-button').text(sessionStorage.getItem('username'));
-                            loggedOutButtons.hide();
-                            loggedInButtons.show();
-                            document.getElementById('username-input').value = '';
-                            document.getElementById('password-input').value = '';
+                            usernameInput.val('');
+                            passwordInput.val('');
                         }, 1500);
                     });
             }, (error) => {
@@ -55,13 +57,13 @@ function anonymousLogin() {
                 response.json()
                     .then(result => {
                         modalAlert(result.message, 'login', 'success');
+                        $('#user-page-button').hide();
+                        loggedOutButtons.hide();
+                        loggedInButtons.show();
                         setTimeout(() => {
                             $('#login-modal').modal('toggle');
-                            $('#user-page-button').hide();
-                            loggedOutButtons.hide();
-                            loggedInButtons.show();
-                            document.getElementById('username-input').value = '';
-                            document.getElementById('password-input').value = '';
+                            $('#username-input').val('');
+                            $('#password-input').val('');
                         }, 1500);
                     });
             }, (error) => {
@@ -90,7 +92,7 @@ function logout() {
 }
 
 function passwordReset() {
-    const username = document.getElementById('username-password-reset-input').value;
+    const username = $('#username-password-reset-input').val();
 
     fetch('/auth/passwordreset/', {
         method: 'POST',
@@ -115,9 +117,12 @@ function passwordReset() {
 }
 
 function register() {
-    const username = document.getElementById('username-register-input').value;
-    const password = document.getElementById('password-register-input').value;
-    const passwordConfirm = document.getElementById('password-confirm-register-input').value;
+    const usernameInput = $('#username-register-input');
+    const passwordInput = $('#password-register-input');
+    const passwordConfirmInput = $('#password-confirm-register-input');
+    const username = usernameInput.val();
+    const password = passwordInput.val();
+    const passwordConfirm = passwordConfirmInput.val();
 
     if (password !== passwordConfirm) {
         modalAlert('Passwords do not match.', 'register', 'warning');
@@ -140,14 +145,14 @@ function register() {
                         .then(result => {
                             modalAlert(result.message, 'register', 'success');
                             sessionStorage.setItem('username', result.username);
+                            $('#user-page-button').html(sessionStorage.getItem('username'));
+                            loggedOutButtons.hide();
+                            loggedInButtons.show();
                             setTimeout(() => {
                                 $('#register-modal').modal('toggle');
-                                $('#user-page-button').html(sessionStorage.getItem('username'));
-                                loggedOutButtons.hide();
-                                loggedInButtons.show();
-                                document.getElementById('username-register-input').value = '';
-                                document.getElementById('password-register-input').value = '';
-                                document.getElementById('password-confirm-register-input').value = '';
+                                usernameInput.val('');
+                                passwordInput.val('');
+                                passwordConfirmInput.val('');
                             }, 1500);
                         });
                 }, (error) => {
