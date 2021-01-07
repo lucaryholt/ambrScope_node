@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const uuid = require('uuid');
+const escape = require('escape-html');
 const firebaseRepo = require('../util/firebaseRepo.js');
 
 router.get('/spots', (req, res) => {
@@ -30,15 +31,15 @@ router.post('/spots', async (req, res) => {
       id: uuid.v4(),
       userID: user.id,
       timestamp: `${new Date().getTime()}`,
-      description: req.body.description,
-      time: req.body.time,
-      chance: req.body.chance,
-      finderMethod: req.body.finderMethod,
+      description: escape(req.body.description),
+      time: escape(req.body.time),
+      chance: escape(req.body.chance),
+      finderMethod: escape(req.body.finderMethod),
       precise: req.body.precise,
       latitude: req.body.latitude,
       longitude: req.body.longitude,
-      amount: req.body.amount,
-      additionalInfo: req.body.additionalInfo,
+      amount: escape(req.body.amount),
+      additionalInfo: escape(req.body.additionalInfo),
     };
     await firebaseRepo.saveSpot(spot);
 
