@@ -2,14 +2,23 @@ const loggedOutButtons = $('#logged-out-buttons');
 const loggedInButtons = $('#logged-in-buttons');
 
 fetch('/logintest')
-    .then((response) => {
-        handleResponse(response, (response) => {
+  .then((response) => {
+    handleResponse(response, (response) => {
+      response.json()
+        .then((result) => {
+          console.log(result);
+          if (!result.isAnonymous) {
+            sessionStorage.setItem('username', result.username);
             $('#user-page-button').html(sessionStorage.getItem('username'));
-            loggedOutButtons.hide();
-        }, (error) => {
-            loggedInButtons.hide();
+          } else {
+            $('#user-page-button').hide();
+          }
+          loggedOutButtons.hide();
         });
+    }, (error) => {
+      loggedInButtons.hide();
     });
+  });
 
 function login() {
   const usernameInput = $('#username-input');

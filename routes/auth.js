@@ -10,7 +10,11 @@ router.get('/logintest', (req, res) => {
   if (req.session.user === undefined) {
     return res.status(403).send({ message: 'Not logged in.' });
   }
-  return res.status(200).send({ message: 'Logged in.' }); //TODO
+  return res.status(200).send({
+    message: 'Logged in.',
+    username: req.session.user.email,
+    isAnonymous: req.session.user.anonymous,
+  });
 });
 
 router.post('/auth/login', (req, res) => {
