@@ -2,14 +2,14 @@ const loggedOutButtons = $('#logged-out-buttons');
 const loggedInButtons = $('#logged-in-buttons');
 
 fetch('/logintest')
-  .then((response) => {
-    if (response.status === 401 || response.status === 403) {
-      loggedInButtons.hide();
-    } else {
-      $('#user-page-button').html(sessionStorage.getItem('username'));
-      loggedOutButtons.hide();
-    }
-  });
+    .then((response) => {
+        handleResponse(response, (response) => {
+            $('#user-page-button').html(sessionStorage.getItem('username'));
+            loggedOutButtons.hide();
+        }, (error) => {
+            loggedInButtons.hide();
+        });
+    });
 
 function login() {
   const usernameInput = $('#username-input');
@@ -124,10 +124,10 @@ function register() {
   const password = passwordInput.val();
   const passwordConfirm = passwordConfirmInput.val();
 
-  if (password !== passwordConfirm) {
-    modalAlert('Passwords do not match.', 'register', 'warning');
-  } else if (password.length < 8) {
+  if (password.length < 8) {
     modalAlert('Password is too short. Needs to be at least 8 characters.', 'register', 'warning');
+  } else if (password !== passwordConfirm) {
+    modalAlert('Passwords do not match.', 'register', 'warning');
   } else {
     fetch('/auth/register', {
       method: 'POST',

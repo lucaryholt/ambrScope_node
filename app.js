@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
 
-require('./util/socketServer.js').initiateSocketServer(server);
+require('./util/socketServer.js')(server);
 require('./util/firebaseRepo.js');
 
 app.use(express.static('public'));
@@ -13,12 +13,19 @@ app.use(express.json());
 
 const session = require('express-session');
 
-app.use(session({
+const sessionOptions = {
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false },
-}));
+}
+
+if (process.env.ENVIRONMENT === 'production') {
+  app.set('trust proxy', 1);
+  sessionOptions.cookie.secure = true;
+}
+
+app.use(session(sessionOptions));
 
 const rateLimiter = require('express-rate-limit');
 

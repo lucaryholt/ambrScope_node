@@ -10,7 +10,7 @@ router.get('/logintest', (req, res) => {
   if (req.session.user === undefined) {
     return res.status(403).send({ message: 'Not logged in.' });
   }
-  return res.status(200).send({ message: 'Logged in.' });
+  return res.status(200).send({ message: 'Logged in.' }); //TODO
 });
 
 router.post('/auth/login', (req, res) => {

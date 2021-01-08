@@ -1,10 +1,6 @@
-window.location.search.split('?')[1].split('&').map((query) => {
-  if (query.split('=')[0] === 'lat') {
-    lat = Number(query.split('=')[1]);
-  } else if (query.split('=')[0] === 'lng') {
-    lng = Number(query.split('=')[1]);
-  }
-});
+const coordinates = window.location.search.split('?')[1].split('&');
+lat = Number(coordinates[0].split('=')[1]);
+lng = Number(coordinates[1].split('=')[1]);
 
 function initMap() {
   if (lat === undefined && lng === undefined) {

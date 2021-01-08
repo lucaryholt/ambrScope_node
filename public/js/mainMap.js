@@ -1,7 +1,7 @@
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 7,
-    center: { lat: 56.085556, lng: 10.8746833 },
+    center: { lat: 56.2, lng: 10.5 },
     mapId: '8a7896a740fb9f7b',
   });
 
@@ -40,8 +40,8 @@ function clearMarkers() {
 function addMarker(spot) {
   const infoWindow = new google.maps.InfoWindow({
     content:
-            `${'<div class="marker">'
-            + '<h3>'}${spot.description}</h3><br>`
+            '<div class="marker">'
+            + `<h3>${spot.description}</h3><br>`
             + `<span>Chance: ${spot.chance}</span><br>`
             + `<span>Finder method: ${spot.finderMethod}</span><br>`
             + `<span>Time: ${spot.time}</span><br>`

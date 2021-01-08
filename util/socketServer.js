@@ -14,6 +14,4 @@ function initiateSocketServer(server) {
   });
 }
 
-module.exports = {
-  initiateSocketServer,
-};
+module.exports = initiateSocketServer;
