@@ -16,19 +16,12 @@ app.use(express.json());
 // Session setup
 const session = require('express-session');
 
-const sessionOptions = {
+app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false },
-};
-
-if (process.env.ENVIRONMENT === 'production') {
-  app.set('trust proxy', 1);
-  sessionOptions.cookie.secure = true;
-}
-
-app.use(session(sessionOptions));
+}));
 
 // Rate limit setup
 const rateLimiter = require('express-rate-limit');
