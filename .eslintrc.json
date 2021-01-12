@@ -13,7 +13,8 @@
     "rules": {
         "no-shadow": "off",
         "array-callback-return": "warn",
-        "consistent-return": "warn"
+        "consistent-return": "warn",
+        "no-console": "off"
     },
     "overrides": [
         {

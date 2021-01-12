@@ -41,6 +41,8 @@ function addMarker(spot) {
   const infoWindow = new google.maps.InfoWindow({
     content:
             '<div class="marker">'
+            + `<img src="https://firebasestorage.googleapis.com/v0/b/ambrscope.appspot.com/o/${spot.id}?alt=media&token=59222da9-213d-431c-b4de-c7418cffebf3" 
+                alt="Spot image" onerror="this.src='./images/icon300.png';" style="max-height: 150px">`
             + `<h3>${spot.description}</h3><br>`
             + `<span>Chance: ${spot.chance}</span><br>`
             + `<span>Finder method: ${spot.finderMethod}</span><br>`
